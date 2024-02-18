@@ -53,3 +53,32 @@
     from {top: 30px; opacity: 1;}
     to {top: 0; opacity: 0;}
   }
+
+
+#card {
+  position: relative;
+  top: 20px;
+  width: 320px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#upper-side-positive {
+  padding: 2em;
+  background-color: #8BC34A;
+  display: block;
+  color: #fff;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+#upper-side-negative {
+  padding: 2em;
+  background-color: #c5373e;
+  display: block;
+  color: #fff;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
