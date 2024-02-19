@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 
+from src.app.users.models.user import User
 
 users_bp = Blueprint("users", import_name=__name__, static_folder='static', template_folder='templates')
 
@@ -9,25 +10,30 @@ def get_login_page():
     return render_template('login_form.html')
 
 
-# @users_bp.route('/user/registration', methods=['POST'])
-# def handle_register_action():
-#     if request.method.POST:
-#         name = request.method.POST['name']
-#         email = request.method.POST['email']
-#         password = request.method.POST['password']
+@users_bp.route('/user/registration/form', methods=['GET'])
+def get_registration_page():
+    return render_template("registration_form.html")
 
-#         if not User.objects.filter(NAME=name, EMAIL=email, PASSWORD=password).exists():
-#             user = User(
-#                 NAME=name,
-#                 EMAIL=email,
-#                 PASSWORD=password
-#             )
-#             user.save()
-#             print('new user')
-#             return redirect('login-form')
-#         else:
-#             print('existing user')
-#             return redirect('registration-form')
-#     else:
-#         print(request.GET)
-#         raise Exception('this requesregister_statust should be post')
+
+@users_bp.route('/user/registration/registrate', methods=['POST'])
+def handle_register_action():
+    from src.app import db
+
+    if request.method.upper() == "POST":
+        input_name = request.form['name']
+        input_email = request.form['email']
+        input_password = request.form['password']
+        try:
+            with db.atomic():
+                user = User.get(User.name==input_name, User.email==input_email, User.password==input_password)
+                return render_template('notification_bad_registration.html')
+        except:
+            user = User(
+                name=input_name,
+                email=input_email,
+                password=input_password
+            )
+            user.save()
+            return render_template('notification_sucessfull_registration.html')
+    else:
+        raise Exception('this request statust should be post')
