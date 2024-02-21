@@ -12,7 +12,7 @@ def get_login_page():
 
 @users_bp.route('/user/registration/form', methods=['GET'])
 def get_registration_page():
-    return render_template("registration_form.html")
+    return render_template("registration/registration_form.html")
 
 
 @users_bp.route('/user/registration/registrate', methods=['POST'])
@@ -26,7 +26,7 @@ def handle_register_action():
         try:
             with db.atomic():
                 user = User.get(User.name==input_name, User.email==input_email, User.password==input_password)
-                return render_template('notification_bad_registration.html')
+                return render_template('registration/notification_bad_registration.html')
         except:
             user = User(
                 name=input_name,
@@ -34,6 +34,6 @@ def handle_register_action():
                 password=input_password
             )
             user.save()
-            return render_template('notification_sucessfull_registration.html')
+            return render_template('registration/notification_sucessfull_registration.html')
     else:
         raise Exception('this request statust should be post')
