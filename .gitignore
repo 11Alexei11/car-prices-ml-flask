@@ -1,4 +1,5 @@
 flask_car_price/
 
 .pyc
+*.log
 __pycache__

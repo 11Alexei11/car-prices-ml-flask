@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('price_predictions.static', filename='styles.css') }}">
+</head>
+
+<body>
+    <form action="/price-predictions/get-car-price" method="post" class="form">
+        <div class="input">
+            <label for="symboling" class="label-name">symboling</label>
+            <select name="symboling" id="symboling" class="select car-values">
+                {% for risk_of_crash in symbolings %}
+                <option value="{{ risk_of_crash }}">{{ risk_of_crash }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label type="text" class="label-name">car name</label>
+            <select name="car_name" id="car_name" class="select car-values">
+                {% for car_name in car_names %}
+                <option value="{{ car_name }}">{{ car_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="fuel_type" class="label-name">fuel type</label>
+            <select name="fuel_type" id="fuel_type" class="select car-values">
+                {% for fuel_type in fuel_types %}
+                <option value="{{ fuel_type }}">{{ fuel_type }}</option>
+                {% endfor %}
+            </select>
+        </div><br>
+        <div class="input">
+            <label for="aspiration" class="label-name">model</label>
+            <select name="aspiration" id="aspiration" class="select car-values">
+                {% for aspiration in aspirations %}
+                <option value="{{ aspiration }}">{{ aspiration }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="door_number" class="label-name">door number</label>
+            <select name="door_number" id="door_number" class="select car-values">
+                {% for door_numb in door_numbers: %}
+                <option value="{{ door_numb }}">{{ door_numb }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="car_body" class="label-name">car body</label>
+            <select name="car_body" class="select car-values">
+                {% for car_body in car_bodys %}
+                <option value="{{ car_body }}">{{ car_body }}</option>
+                {% endfor %}
+            </select>
+        </div><br>
+        <div class="input">
+            <label for="drive_wheel" class="label-name">drive wheel</label>
+            <select name="drive_wheel" class="select car-values">
+                {% for drive_wheel in drive_wheels %}
+                <option value="{{ drive_wheel }}">{{ drive_wheel }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="engine_location" class="label-name">engine location</label>
+            <select name="engine_location" class="select car-values car-values">
+                {% for engine_location in engine_locations %}
+                <option value="{{ engine_location }}">{{ engine_location }}</option>
+                {% endfor %}
+            </select>
+        </div><br>
+        <div class="input">
+            <label for="wheel_base" class="label-name">wheel base</label>
+            <input type="text" id="wheel_base" name="wheel_base" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="car_length" class="label-name">car length</label>
+            <input type="text" id="car_length" name="car_length" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="car_width" class="label-name">car width</label>
+            <input type="text" id="car_width" name="car_width" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="car_height" class="label-name">car height</label>
+            <input type="text" id="car_height" name="car_height" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="curb_weight" class="label-name">curb weight</label>
+            <input type="text" id="curb_weight" name="curb_weight" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="engine_type" class="label-name">engine type</label>
+            <select name="engine_type" class="select car-values">
+                {% for engine_type in engine_types %}
+                <option value="{{ engine_type }}">{{ engine_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="cylinder_number" class="label-name">cylinder number</label>
+            <select name="cylinder_number" class="select car-values">
+                {% for cylinder_number in cylinder_numbers %}
+                <option value="{{ cylinder_number }}">{{ cylinder_number }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="engine_size" class="label-name">engine size</label>
+            <input type="text" id="engine_size" name="engine_size" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="fuel_system" class="label-name">fuel system</label>
+            <select name="fuel_system" class="select car-values">
+                {% for fuel_system in fuel_systems %}
+                <option value="{{ fuel_system }}">{{ fuel_system }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input">
+            <label for="bore_ratio" class="label-name">bore ratio</label>
+            <input type="text" id="bore_ratio" name="bore_ratio" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="stroke" class="label-name">stroke</label>
+            <input type="text" id="stroke" name="stroke" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="compression_ratio" class="label-name">compression ratio</label>
+            <input type="text" id="compression_ratio" name="compression_ratio" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="horse_power" class="label-name">horse power</label>
+            <input type="text" name="horse_power" id="horse_power" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="peak_rpm" class="label-name">peak rpm</label>
+            <input type="text" name="peak_rpm" id="peak_rpm" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="city_mpg" class="label-name">city mpg</label>
+            <input type="text" name="city_mpg" id="city_mpg" class="label car-values" value="0">
+        </div>
+        <div class="input">
+            <label for="highway_mpg" class="label-name">highway mpg</label>
+            <input type="text" id="highway_mpg" name="highway_mpg" class="label car-values" value="0">
+        </div>
+        <input type="submit" value="Predict" class="button">
+        <label class="predictions" value="0">Prediction: {{ price }}</label>
+    </form>
+</body>
+
+</html>

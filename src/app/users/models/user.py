@@ -1,15 +1,12 @@
-from peewee import Model, TextField, BooleanField, AutoField
+from uuid import uuid4
 
-from src.app import db
+from peewee import TextField, BooleanField, UUIDField
 
-
-class BaseModel(Model):
-    class Meta:
-        database = db
+from src.utils.base_model import BaseModel
 
 
 class User(BaseModel):
-    user_id = AutoField()
+    user_id = UUIDField(unique=True, null=False, primary_key=True, default=uuid4)
     name = TextField(null=False)
     email = TextField(null=False)
     password = TextField(null=False)

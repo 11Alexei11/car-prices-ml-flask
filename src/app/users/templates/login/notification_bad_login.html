@@ -1,9 +1,7 @@
-{% extends "registration/form_base.html" %}
+{% extends "login/form_base.html" %}
 {% block content %}
-<style>
-</style>
 <div id='card' class="animated fadeIn">
-    <div id='upper-side'>
+    <div id='upper-side-negative'>
       </svg>
       <h3 id='status'>
         Bad
@@ -11,7 +9,7 @@
     </div>
     <div id='lower-side'>
       <p id='message'>
-        Sorry, User with such credentials is already in system. Please try another credentials
+        Sorry, email or password is not correct. Please try again with another credentials
       </p>
     </div>
 </div>
