@@ -2,8 +2,6 @@ import yaml
 import os
 import pickle as pkl
 
-from dvclive import Live
-
 from sklearn.linear_model import LinearRegression
 import sys
 import pandas as pd
@@ -21,10 +19,10 @@ def train():
 
     dataset = {}
     for file in dvc_train_config['stages'][StageNames.TRAIN][DvcStageParamsNames.DEPS]:
-        file_name_path, _ = os.path.splitext(file)
+        file_name_path, ext = os.path.splitext(file)
         file_name = os.path.basename(file_name_path)
 
-        if not file_name.count('train'):
+        if not file_name.count('train') or ext != ".csv":
             continue
 
         dataset['train'] = {
@@ -42,17 +40,6 @@ def train():
     os.makedirs(model_directory, exist_ok=True)
     with open(model_save_path, 'wb') as f:
         pkl.dump(model, f)
-
-    with Live() as live:
-        model_name_with_ext = os.path.basename(model_save_path)
-        model_name, _ = os.path.splitext(model_name_with_ext)
-
-        live.log_artifact(
-            path=model_save_path,
-            name=model_name,
-            desc='Linear Regression with base params',
-            labels=['regression']
-        )
 
 
 if __name__ == "__main__":

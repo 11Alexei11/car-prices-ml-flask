@@ -40,12 +40,9 @@ def evaluate():
 
     save_folder = os.path.dirname(dvc_evaluate_config[DvcStageParamsNames.OUTS][0])
     os.makedirs(save_folder, exist_ok=True)
-    with Live(dir=save_folder, save_dvc_exp=True) as live:
-        for metric_name, metric_value in metrics.items():
-            live.log_metric(name=metric_name, val=metric_value)
+    with open(dvc_evaluate_config[DvcStageParamsNames.OUTS][0], 'w') as f:
+        json.dump(metrics, f, indent=4)
 
-        with open(dvc_evaluate_config[DvcStageParamsNames.OUTS][0], 'w') as f:
-            json.dump(metrics, f, indent=4)
 
 if __name__ == "__main__":
     evaluate()
