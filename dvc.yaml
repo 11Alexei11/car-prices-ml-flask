@@ -33,3 +33,8 @@ artifacts:
     desc: Linear Regression with base params
     labels:
     - regression
+metrics:
+- data/stages/evaluate/metrics.json
+plots:
+- data/stages/evaluate/plots/metrics:
+    x: step
