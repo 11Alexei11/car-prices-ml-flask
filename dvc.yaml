@@ -1,0 +1,35 @@
+stages:
+  preprocess:
+    cmd: python3 src/research/pipeline/preprocess.py
+    deps:
+    - data/dataset_raw/test.csv
+    - data/dataset_raw/train.csv
+    outs:
+    - data/stages/preprocess/minmax_scalers.pkl
+    - data/stages/preprocess/encoders.pkl
+    - data/stages/preprocess/test_preprocessed.csv
+    - data/stages/preprocess/train_preprocessed.csv
+  train:
+    cmd: python3 src/research/pipeline/train.py
+    deps:
+    - data/stages/preprocess/test_preprocessed.csv
+    - data/stages/preprocess/train_preprocessed.csv
+    - src/research/pipeline/preprocess.py
+    outs:
+    - data/stages/train/lin_reg-default_params.pkl
+  evaluate:
+    cmd: python3 src/research/pipeline/evaluate.py
+    deps:
+    - data/stages/preprocess/test_preprocessed.csv
+    - data/stages/train/lin_reg-default_params.pkl
+    - data/stages/preprocess/minmax_scalers.pkl
+    - src/research/pipeline/train.py
+    - src/research/pipeline/evaluate.py
+    outs:
+    - data/stages/evaluate/metrics.json
+artifacts:
+  lin_reg-default_params:
+    path: data/stages/train/lin_reg-default_params.pkl
+    desc: Linear Regression with base params
+    labels:
+    - regression
