@@ -43,6 +43,9 @@ def evaluate():
     with open(dvc_evaluate_config[DvcStageParamsNames.OUTS][0], 'w') as f:
         json.dump(metrics, f, indent=4)
 
+    print('metrics: ')
+    print(json.dumps(metrics, indent=4))
+
 
 if __name__ == "__main__":
     evaluate()
