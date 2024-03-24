@@ -16,12 +16,12 @@ stages:
     - data/stages/preprocess/train_preprocessed.csv
     - src/research/pipeline/preprocess.py
     outs:
-    - data/stages/train/lin_reg-default_params.pkl
+    - data/stages/train/gradient_boosting_regressor-default_params.pkl
   evaluate:
     cmd: python3 src/research/pipeline/evaluate.py
     deps:
     - data/stages/preprocess/test_preprocessed.csv
-    - data/stages/train/lin_reg-default_params.pkl
+    - data/stages/train/gradient_boosting_regressor-default_params.pkl
     - data/stages/preprocess/minmax_scalers.pkl
     - src/research/pipeline/train.py
     - src/research/pipeline/evaluate.py
