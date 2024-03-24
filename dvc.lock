@@ -65,8 +65,8 @@ stages:
       size: 3139
     - path: src/research/pipeline/evaluate.py
       hash: md5
-      md5: 73143cb502a39eaab5202869c9ca44a5
-      size: 1640
+      md5: ef4c0b4a8b827652d6525ccfa0bbede1
+      size: 1705
     - path: src/research/pipeline/train.py
       hash: md5
       md5: 218a7f6ee33d9fee0408830228c4c45d
