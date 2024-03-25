@@ -2,6 +2,7 @@ import yaml
 import os
 import pickle as pkl
 
+from sklearn.linear_model import LinearRegression
 import sys
 sys.path.append(os.getcwd())
 
@@ -29,7 +30,7 @@ def train():
         dataset['train']['y'] = dataset['train']['x'].pop(dataset_config['target_column'])
 
     # hashlib.sha256()
-    model = ...
+    model = LinearRegression
     model.fit(dataset['train']['x'], dataset['train']['y'])
 
     model_save_path = dvc_train_config['stages'][StageNames.TRAIN][DvcStageParamsNames.OUTS][0]
