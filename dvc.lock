@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python3 src/research/pipeline/preprocess.py
+    deps:
+    - path: data/dataset_raw/test.csv
+      hash: md5
+      md5: a416494cc7248e617ccee3a74db1240b
+      size: 1773
+    - path: data/dataset_raw/train.csv
+      hash: md5
+      md5: 1c246ec9e605688ebf85b563a0022354
+      size: 24052
+    outs:
+    - path: data/stages/preprocess/encoders.pkl
+      hash: md5
+      md5: 0eae68af5771d5f5d4e7df91f629c2e8
+      size: 4192
+    - path: data/stages/preprocess/minmax_scalers.pkl
+      hash: md5
+      md5: 0eae68af5771d5f5d4e7df91f629c2e8
+      size: 4192
+    - path: data/stages/preprocess/test_preprocessed.csv
+      hash: md5
+      md5: 923f5481f46c220536a49626efab7d90
+      size: 7502
+    - path: data/stages/preprocess/train_preprocessed.csv
+      hash: md5
+      md5: 1dbe5db2d5bc5fb1542ce37ee335de5d
+      size: 106700
+  train:
+    cmd: python3 src/research/pipeline/train.py
+    deps:
+    - path: data/stages/preprocess/test_preprocessed.csv
+      hash: md5
+      md5: 923f5481f46c220536a49626efab7d90
+      size: 7502
+    - path: data/stages/preprocess/train_preprocessed.csv
+      hash: md5
+      md5: 1dbe5db2d5bc5fb1542ce37ee335de5d
+      size: 106700
+    - path: src/research/pipeline/preprocess.py
+      hash: md5
+      md5: 5d699979658a284d4d7703c47a1b3411
+      size: 4433
+    outs:
+    - path: data/stages/train/model.pkl
+      hash: md5
+      md5: 539b4010479c0212b81179bc6c1494e1
+      size: 3139
+  evaluate:
+    cmd: python3 src/research/pipeline/evaluate.py
+    deps:
+    - path: data/stages/preprocess/minmax_scalers.pkl
+      hash: md5
+      md5: 0eae68af5771d5f5d4e7df91f629c2e8
+      size: 4192
+    - path: data/stages/preprocess/test_preprocessed.csv
+      hash: md5
+      md5: 923f5481f46c220536a49626efab7d90
+      size: 7502
+    - path: data/stages/train/model.pkl
+      hash: md5
+      md5: 539b4010479c0212b81179bc6c1494e1
+      size: 3139
+    - path: src/research/pipeline/evaluate.py
+      hash: md5
+      md5: 5c82457dab02e3499db160b5d4c28e23
+      size: 1742
+    - path: src/research/pipeline/train.py
+      hash: md5
+      md5: 2d61996a4ef2d36b5b054e835d3019b1
+      size: 1367
+    outs:
+    - path: data/stages/evaluate/metrics.json
+      hash: md5
+      md5: 180dbf8026fbe6d352972f12646dbdcb
+      size: 206
