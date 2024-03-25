@@ -41,7 +41,7 @@ def evaluate():
     save_folder = os.path.dirname(dvc_evaluate_config[DvcStageParamsNames.OUTS][0])
     os.makedirs(save_folder, exist_ok=True)
 
-    with Live(dir="data/stages/evaluate") as live:
+    with Live(dir=save_folder) as live:
         for metric_name, metric_value in metrics.items():
             live.summary[metric_name] = metric_value
 
