@@ -40,8 +40,10 @@ def evaluate():
 
     save_folder = os.path.dirname(dvc_evaluate_config[DvcStageParamsNames.OUTS][0])
     os.makedirs(save_folder, exist_ok=True)
-    with open(dvc_evaluate_config[DvcStageParamsNames.OUTS][0], 'w') as f:
-        json.dump(metrics, f, indent=4)
+
+    with Live(dir="data/stages/evaluate") as live:
+        for metric_name, metric_value in metrics.items():
+            live.summary[metric_name] = metric_value
 
     print('metrics: ')
     print(json.dumps(metrics, indent=4))
