@@ -46,8 +46,8 @@ stages:
     outs:
     - path: data/stages/train/model.pkl
       hash: md5
-      md5: 539b4010479c0212b81179bc6c1494e1
-      size: 3139
+      md5: 8d8e94eebabc872711e9250ce376d3fe
+      size: 125570
   evaluate:
     cmd: python3 src/research/pipeline/evaluate.py
     deps:
@@ -61,8 +61,8 @@ stages:
       size: 7502
     - path: data/stages/train/model.pkl
       hash: md5
-      md5: 539b4010479c0212b81179bc6c1494e1
-      size: 3139
+      md5: 8d8e94eebabc872711e9250ce376d3fe
+      size: 125570
     - path: src/research/pipeline/evaluate.py
       hash: md5
       md5: 5c82457dab02e3499db160b5d4c28e23
@@ -74,5 +74,5 @@ stages:
     outs:
     - path: data/stages/evaluate/metrics.json
       hash: md5
-      md5: 180dbf8026fbe6d352972f12646dbdcb
+      md5: 43b11e2e3a8d8e33f0d74915ee565692
       size: 206
