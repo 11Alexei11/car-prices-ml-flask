@@ -1,9 +1,10 @@
 import yaml
 import os
 import pickle as pkl
-
 import sys
 sys.path.append(os.getcwd())
+
+from sklearn.ensemble import RandomForestRegressor
 
 from src.utils.config import ConfigLoader
 from src.research.utilities import DvcStageParamsNames
@@ -29,7 +30,7 @@ def train():
         dataset['train']['y'] = dataset['train']['x'].pop(dataset_config['target_column'])
 
     # hashlib.sha256()
-    model = ...
+    model = RandomForestRegressor()
     model.fit(dataset['train']['x'], dataset['train']['y'])
 
     model_save_path = dvc_train_config['stages'][StageNames.TRAIN][DvcStageParamsNames.OUTS][0]
